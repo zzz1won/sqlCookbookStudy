@@ -1,0 +1,2 @@
+INSERT INTO AC_EDU_SCHEDULE(ac_edu_schedule_no,ac_edu_id,ac_edu_seq,ac_edu_title,ac_edu_start_date,ac_edu_end_date,ac_edu_place,ac_edu_contents,ac_apply_start_date,ac_apply_end_date,ac_apply_limit_count,ac_edu_institute,reg_date,reg_id,mod_date,mod_id,ac_edu_url) VALUES (2,'ihloLsf',1,'Å×½ºÆ®','20220406','20220406','','<p><br></p>','20220406','20220406',10,'','2022/04/06 01:14:00','admin',NULL,NULL,'');
+
