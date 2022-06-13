@@ -587,3 +587,27 @@ ON (d.deptno = e.deptno) WHERE e.job IS NULL ORDER BY deptno;
 
 
 
+SELECT	COUNT(*)
+FROM	(
+	SELECT 	(CASE WHEN A.ac_edu_end_date < DATE_FORMAT(NOW(), '%Y%m%d')	THEN '04' -- 종료
+			WHEN A.ac_apply_end_date < DATE_FORMAT(NOW(), '%Y%m%d') THEN '03' -- 인원마감
+			WHEN A.ac_apply_limit_count = 
+					(	SELECT COUNT(*) 
+						FROM EDU_APPLY_INFO B
+						WHERE A.ac_edu_id = B.ac_edu_id
+						)										  THEN '03' -- 인원마감
+			WHEN A.ac_apply_start_date > DATE_FORMAT(NOW(), '%Y%m%d')  THEN '01' -- 대기중
+			ELSE '02' -- 신청중
+		END) AS ac_edu_status /* 01: 대기중, 02: 신청중, 03: 인원마감, 04: 종료 */
+	FROM	AC_EDU_SCHEDULE A
+	WHERE
+		YEAR(ac_edu_start_date) =
+		#{year}
+			) B
+	]]>
+		<if test="eduStatus != null and eduStatus != ''">
+		<![CDATA[
+		WHERE
+				B.ac_edu_status = #{eduStatus}
+		]]>
+		</if>
